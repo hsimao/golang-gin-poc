@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hsimao/rest-api-gin/controller"
-	"github.com/hsimao/rest-api-gin/middlewares"
-	"github.com/hsimao/rest-api-gin/service"
+	"github.com/hsimao/golang-gin-poc/controller"
+	"github.com/hsimao/golang-gin-poc/middlewares"
+	"github.com/hsimao/golang-gin-poc/service"
 	gindump "github.com/tpkeeper/gin-dump"
 )
 

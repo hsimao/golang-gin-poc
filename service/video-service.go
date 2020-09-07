@@ -1,6 +1,6 @@
 package service
 
-import "github.com/hsimao/rest-api-gin/entity"
+import "github.com/hsimao/golang-gin-poc/entity"
 
 type VideoService interface {
 	Save(entity.Video) entity.Video

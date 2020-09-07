@@ -1,4 +1,4 @@
-module github.com/hsimao/rest-api-gin
+module github.com/hsimao/golang-gin-poc
 
 go 1.14
 
