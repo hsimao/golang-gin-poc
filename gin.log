@@ -1,0 +1,10 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /videos                   --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /videos                   --> main.main.func2 (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+::1 - [07 Sep 20 19:20 CST] GET /videos 200 545.948µs 
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 200
+::1 - [07 Sep 20 19:20 CST] POST /videos 200 176.191µs 
