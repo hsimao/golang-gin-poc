@@ -13,8 +13,12 @@ import (
 )
 
 var (
-	videoService    service.VideoService       = service.New()
+	videoService service.VideoService = service.New()
+	loginService service.LoginService = service.NewLoginService()
+	jwtService   service.JWTService   = service.NewJWTService()
+
 	videoController controller.VideoController = controller.New(videoService)
+	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
 )
 
 // 將 api log 寫到 gin.log 檔案內
@@ -37,11 +41,21 @@ func main() {
 		gindump.Dump(), // 印出 headers、body 資訊
 	)
 
-	// api route group
-	apiRoutes := server.Group("/api")
-	{
-		apiRoutes.Use(middlewares.BasicAuth())
+	// Login Endpoint: Authentication + Token creation
+	server.POST("/login", func(ctx *gin.Context) {
+		token := loginController.Login(ctx)
+		if token != "" {
+			ctx.JSON(http.StatusOK, gin.H{
+				"token": token,
+			})
+		} else {
+			ctx.JSON(http.StatusUnauthorized, nil)
+		}
+	})
 
+	// JWT Authorization Middleware applies to "/api" only.
+	apiRoutes := server.Group("/api", middlewares.AuthorizeJWT())
+	{
 		apiRoutes.GET("/videos", func(ctx *gin.Context) {
 			ctx.JSON(200, videoController.FindAll())
 		})
